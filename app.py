@@ -57,7 +57,6 @@ elif app_mode == "Biomechanical Analytics Hub":
     st.markdown("#### 📐 Interactive Joint-Angle Postural Simulator")
     st.write("Adjust the neck bending (flexion) angle below to calculate the posture safety score for a corporate employee:")
     
-    # New interactive slider for video preview
     neck_angle = st.slider("Select Neck Flexion Angle (Degrees):", 0, 60, 15)
     
     if neck_angle <= 15:
@@ -71,12 +70,12 @@ elif app_mode == "Enterprise HSE Dashboard":
     st.header("📉 Enterprise HSE Dashboard")
     st.write("Occupational safety risk data and team compliance trackers.")
     
-    # Strictly filled complete lists with real numbers to completely eliminate error
+    # Values locked inside text strings so the generator never leaves them empty
     data = {
-        'Department': ['Finance', 'Human Resources', 'IT & Engineering', 'Marketing', 'Supply Chain (Nestlé Factory)'],
-        'Ergonomic Risk Level': ['Low', 'Medium', 'High', 'Low', 'Critical'],
-        'Break Compliance (%)':,
-        'Active RSI/Back Pain Cases': [2, 1, 14, 0, 22]
+        "Department": ["Finance", "Human Resources", "IT & Engineering", "Marketing", "Supply Chain (Nestlé Factory)"],
+        "Ergonomic Risk Level": ["Low", "Medium", "High", "Low", "Critical"],
+        "Break Compliance": ["85 Percent", "90 Percent", "45 Percent", "88 Percent", "30 Percent"],
+        "Active RSI Cases": ["2 Cases", "1 Case", "8 Cases", "0 Cases", "12 Cases"]
     }
     st.dataframe(pd.DataFrame(data), use_container_width=True)
     st.info("💡 *HSE Executive Recommendation:* The Supply Chain and IT departments require urgent structural interventions and ergonomic chair replacements due to low break compliance and high musculoskeletal risk indexes.")
