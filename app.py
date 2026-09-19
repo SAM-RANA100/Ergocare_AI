@@ -33,12 +33,10 @@ if app_mode == "RAG AI Copilot":
     
     if user_query:
         try:
-            # RAG Vectorization Logic with fallback protection
             vectorizer = TfidfVectorizer()
             all_texts = knowledge_base + [user_query]
             tfidf_matrix = vectorizer.fit_transform(all_texts)
             
-            # Compute similarity between query and knowledge base
             sim_scores = cosine_similarity(tfidf_matrix[-1], tfidf_matrix[:-1]).flatten()
             best_match_idx = sim_scores.argmax()
             
@@ -55,18 +53,30 @@ if app_mode == "RAG AI Copilot":
 elif app_mode == "Biomechanical Analytics Hub":
     st.header("📊 Biomechanical Analytics Hub")
     st.write("Real-time postural assessments and corporate musculoskeletal risk metrics.")
-    st.info("This interface represents automated joint-angle analysis and diagnostic postural analytics.")
+    
+    st.markdown("#### 📐 Interactive Joint-Angle Postural Simulator")
+    st.write("Adjust the neck bending (flexion) angle below to calculate the posture safety score for a corporate employee:")
+    
+    # New interactive element for the video!
+    neck_angle = st.slider("Select Neck Flexion Angle (Degrees):", 0, 60, 15)
+    
+    if neck_angle <= 15:
+        st.success(f"Neck Angle: {neck_angle}° - Low Risk! Ergonomically safe setup.")
+    elif neck_angle <= 30:
+        st.warning(f"Neck Angle: {neck_angle}° - Moderate Risk. Ergonomic adjustments recommended to avoid neck fatigue.")
+    else:
+        st.error(f"Neck Angle: {neck_angle}° - Critical Risk! High chance of developing forward neck syndrome and severe strain.")
 
 elif app_mode == "Enterprise HSE Dashboard":
     st.header("📉 Enterprise HSE Dashboard")
     st.write("Occupational safety risk data and team compliance trackers.")
     
-    # All data numbers are fully filled and verified here to guarantee zero errors
+    # 100% full lists to prevent any error
     data = {
-        'Department': ['Finance', 'Human Resources', 'IT & Engineering', 'Marketing', 'Supply Chain'],
+        'Department': ['Finance', 'Human Resources', 'IT & Engineering', 'Marketing', 'Supply Chain (Nestlé Factory)'],
         'Ergonomic Risk Level': ['Low', 'Medium', 'High', 'Low', 'Critical'],
-        'Break Compliance (%)': [85, 90, 65, 88, 45],
-        'Active RSI Cases': [2, 1, 7, 0, 12]
+        'Break Compliance (%)':,
+        'Active RSI/Back Pain Cases': [2, 4, 12, 1, 18]
     }
     st.dataframe(pd.DataFrame(data), use_container_width=True)
-   
+    st.info("💡 *HSE Executive Recommendation:* The Supply Chain and IT departments require urgent structural interventions and ergonomic chair replacements due to low break compliance and high musculoskeletal risk indexes.")
